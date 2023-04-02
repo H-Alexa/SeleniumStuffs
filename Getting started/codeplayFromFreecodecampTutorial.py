@@ -1,3 +1,6 @@
+#https://www.youtube.com/watch?v=j7VZsCCnptM
+
+
 import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
