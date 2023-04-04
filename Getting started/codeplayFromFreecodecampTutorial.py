@@ -11,6 +11,7 @@ from selenium.webdriver.common.keys import Keys
 
 driver = webdriver.Firefox();
 # driver.get("https://jqueryui.com/resources/demos/progressbar/download.html")
+
 # driver.implicitly_wait(5)
 # myElement = driver.find_element(By.ID, 'downloadButton')
 
