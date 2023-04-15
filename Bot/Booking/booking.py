@@ -1,4 +1,5 @@
 import os
+from Booking.booking_filtration import BookingFiltration
 import Booking.constants as const
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -8,7 +9,7 @@ from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium import webdriver
-from Booking.booking_filtration import BookingFiltration
+
 
 
 def block(self):
@@ -17,6 +18,7 @@ def block(self):
             close.click()
             close = self.find_element(By.CSS_SELECTOR,'path[d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"]')
             close.click()
+            
         except:
             check = 1
 
@@ -131,6 +133,10 @@ class Booking(webdriver.Firefox):
     
     def select_adults(self, count=1):
         block(self)
+        self.implicitly_wait(3)
+        block(self)
+        self.implicitly_wait(5)
+        block(self)
         adults = self.find_element(By.CLASS_NAME,"d67edddcf0")
         adults.click()
 
@@ -180,5 +186,8 @@ class Booking(webdriver.Firefox):
         submit = self.find_element(By.CSS_SELECTOR,'Button[type="submit"]')
         submit.click()
 
-    def apply_filtration():
+    def apply_filtration(self):
         filter = BookingFiltration(driver=self)
+        filter.sortPrice()
+        self.implicitly_wait(100)
+        filter.applyStarRating(4,5)

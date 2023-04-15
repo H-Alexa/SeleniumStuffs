@@ -9,8 +9,9 @@ with Booking(teardown=False) as bot:
     bot.change_currency()
     bot.selectPlaceToGo('New York')
     bot.selectDate('2023-04-23','2023-05-01')
-    bot.select_adults(10)
+    bot.select_adults(4)
     bot.submit()
+    bot.apply_filtration()
     # print('Exiting')
 
 # inst = Booking()
