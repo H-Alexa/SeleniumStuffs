@@ -7,10 +7,10 @@ with Booking(teardown=False) as bot:
     
     bot.land_first_page()
     bot.change_currency()
-    # bot.selectPlaceToGo('New York')
-    bot.selectDate('2023-04-07','2023-09-01')
-    # bot.select_adults(10)
-    # bot.submit()
+    bot.selectPlaceToGo('New York')
+    bot.selectDate('2023-04-23','2023-05-01')
+    bot.select_adults(10)
+    bot.submit()
     # print('Exiting')
 
 # inst = Booking()

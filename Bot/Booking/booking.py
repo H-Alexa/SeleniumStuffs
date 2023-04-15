@@ -8,11 +8,12 @@ from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 from selenium import webdriver
+from Booking.booking_filtration import BookingFiltration
 
 
 def block(self):
         try:
-            close = self.find_element(By.CSS_SELECTOR,'btn[aria-label="Dismiss sign-in info."]')
+            close = self.find_element(By.CSS_SELECTOR,'button[aria-label="Dismiss sign-in info."]')
             close.click()
             close = self.find_element(By.CSS_SELECTOR,'path[d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"]')
             close.click()
@@ -42,6 +43,8 @@ class Booking(webdriver.Firefox):
         self.implicitly_wait(5)
         block(self)
         selected_currency = self.find_element(By.CLASS_NAME,'cf67405157')
+        block(self)
+        
         self.implicitly_wait(5)
         block(self)
         selected_currency.click()
@@ -58,6 +61,10 @@ class Booking(webdriver.Firefox):
         block(self)
 
         field.click()
+        # nextPage = self.find_element(By.CSS_SELECTOR,'button[class="fc63351294.a822bdf511.e3c025e003.fa565176a8.cfb238afa1.c334e6f658.ae1678b153.c9fa5fc96d.be298b15fa"]')
+        # nextPage.click()
+        # nextPage.click()
+
 
         # self.implicitly_wait(10)
         # try:
@@ -86,26 +93,25 @@ class Booking(webdriver.Firefox):
 
         # # except:
         # #     check = 1      
-        monthOne = int(checkInDate[5:7])
-        monthTwo = int(checkOutDate[5:7])
-        print(monthOne)
-        print(monthTwo)
+        # monthOne = int(checkInDate[5:7])
+        # monthTwo = int(checkOutDate[5:7])
+        # print(monthOne)
+        # print(monthTwo)
 
-        yearOne = int(checkInDate[0:4])
-        yearTwo = int(checkOutDate[0:4])
+        # yearOne = int(checkInDate[0:4])
+        # yearTwo = int(checkOutDate[0:4])
 
-        if yearTwo>yearOne:
-            monthTwo=monthTwo * (12*(yearTwo-yearOne))
-        if monthTwo-monthOne>1:
-            print("Yes")
-            block(self)
+        # if yearTwo>yearOne:
+        #     monthTwo=monthTwo * (12*(yearTwo-yearOne))
+        # if monthTwo-monthOne>1:
+        #     print("Yes")
+        #     block(self)
 
-            rep = monthTwo-monthOne-1
-            nextPage = self.find_element(By.CSS_SELECTOR,'path[d="M9.45 6c.2 0 .39.078.53.22l5 5c.208.206.323.487.32.78a1.1 1.1 0 0 1-.32.78l-5 5a.75.75 0 0 1-1.06 0 .74.74 0 0 1 0-1.06L13.64 12 8.92 7.28a.74.74 0 0 1 0-1.06.73.73 0 0 1 .53-.22zm4.47 5.72zm0 .57z"]')
-            while rep>0:
-                rep-=1
-                block(self)
-                nextPage.click()  
+        #     rep = monthTwo-monthOne-1
+        #     nextPage = self.find_element(By.CSS_SELECTOR,'path[d="M9.45 6c.2 0 .39.078.53.22l5 5c.208.206.323.487.32.78a1.1 1.1 0 0 1-.32.78l-5 5a.75.75 0 0 1-1.06 0 .74.74 0 0 1 0-1.06L13.64 12 8.92 7.28a.74.74 0 0 1 0-1.06.73.73 0 0 1 .53-.22zm4.47 5.72zm0 .57z"]')
+        #     for i in range(rep):
+        #         # block(self)
+        #         nextPage.click()  
 
 
 
@@ -115,7 +121,7 @@ class Booking(webdriver.Firefox):
 
         # # except:
         # #     check = 1           
-        block(self)
+        # block(self)
         # field.click()
         
         checkOutElement = self.find_element(By.CSS_SELECTOR, f'span[data-date="{checkOutDate}"]')
@@ -147,7 +153,32 @@ class Booking(webdriver.Firefox):
             increase.click()
         # self.implicitly_wait(2)
         # block(self)
+    # def select_children(self, count=0):
+    #     block(self)
+    #     while True:
+    #         childCountElement =self.find_element(By.ID,"group_children")
+    #         # self.implicitly_wait(3)
+    #         block(self)
+    #         childCount = childCountElement.get_attribute("value")
+    #         # print(f'{adultCount} lalalal')
+    #         if int(childCount)==0:
+    #             break
+    #         decrease = self.find_element(By.CSS_SELECTOR,'path[d="M20.25 12.75H3.75a.75.75 0 0 1 0-1.5h16.5a.75.75 0 0 1 0 1.5z"]')
+    #         decrease.click()
+    #         self.implicitly_wait(3)
+    #         block(self)
+
+    #     # print(adultCount)
+
+    #     increase = self.find_element(By.CSS_SELECTOR,'path[d="M20.25 11.25h-7.5v-7.5a.75.75 0 0 0-1.5 0v7.5h-7.5a.75.75 0 0 0 0 1.5h7.5v7.5a.75.75 0 0 0 1.5 0v-7.5h7.5a.75.75 0 0 0 0-1.5z"]')
+    #     for i in range(count-1):
+    #         increase.click()
+    #     # self.implicitly_wait(2)
+    #     # block(self)
 
     def submit(self):
         submit = self.find_element(By.CSS_SELECTOR,'Button[type="submit"]')
         submit.click()
+
+    def apply_filtration():
+        filter = BookingFiltration(driver=self)
